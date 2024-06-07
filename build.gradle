@@ -47,7 +47,7 @@ tasks.register("apiTest") {
                     '--plugin', 'pretty',
                     '--plugin', 'html:reports/cucumber-api-report.html',
                     '--glue', 'stepDefinition',
-                    '--tags', "@ui",
+                    '--tags', "@web",
                     'src/test/java/features'
             ]
         }
