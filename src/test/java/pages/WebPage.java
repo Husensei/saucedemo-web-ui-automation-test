@@ -106,7 +106,8 @@ public class WebPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//select[@class='product_sort_container']//option")));
         List<Utility.ProductInfo> productsBeforeSort = getProductsInfo();
-        System.out.println(productsBeforeSort);
+        expectedOrder = new ArrayList<>(productsBeforeSort);
+        System.out.println("before" + productsBeforeSort);
 
         WebElement options = driver.findElement(By.xpath("//select[@class='product_sort_container']"));
         Select option = new Select(options);
@@ -114,41 +115,34 @@ public class WebPage {
         switch (sortOptions) {
             case "Name (A to Z)":
                 option.selectByValue("az");
+                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getName));
+                System.out.println("expected" + expectedOrder);
                 break;
             case "Name (Z to A)":
                 option.selectByValue("za");
+                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getName).reversed());
+                System.out.println("expected" + expectedOrder);
                 break;
             case "Price (low to high)":
                 option.selectByValue("lohi");
+                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getPrice));
+                System.out.println("expected" + expectedOrder);
                 break;
             case "Price (high to low)":
                 option.selectByValue("hilo");
+                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getPrice).reversed());
+                System.out.println("expected" + expectedOrder);
                 break;
             default:
                 System.out.println("Invalid sort option provided: " + sortOptions);
         }
-        expectedOrder = new ArrayList<>(productsBeforeSort);
+
     }
 
-    public void userShouldSeeTheItemsSortedBy(String sortOptions) {
+    public void userShouldSeeTheItemsSortedBy() {
         List<Utility.ProductInfo> productsAfterSort  = getProductsInfo();
-        System.out.println(productsAfterSort);
+        System.out.println("after" + productsAfterSort);
 
-        switch (sortOptions) {
-            case "Name (A to Z)":
-                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getName));
-                break;
-            case "Name (Z to A)":
-                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getName).reversed());
-                break;
-            case "Price (low to high)":
-                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getPrice));
-                break;
-            case "Price (high to low)":
-                expectedOrder.sort(Comparator.comparing(Utility.ProductInfo::getPrice).reversed());
-                break;
-            default:
-                System.out.println("Invalid sort option provided: " + sortOptions);
-        }
+        assertThat(expectedOrder).isEqualTo(productsAfterSort);
     }
 }

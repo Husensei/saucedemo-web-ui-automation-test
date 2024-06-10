@@ -88,8 +88,8 @@ public class WebStep {
         webPage.userClicksSortButtonAndSelect(sortOptions);
     }
 
-    @Then("user should see the items sorted by {string}")
-    public void userShouldSeeTheItemsSortedBy(String sortOptions) {
-        webPage.userShouldSeeTheItemsSortedBy(sortOptions);
+    @Then("user should see the items are sorted")
+    public void userShouldSeeTheItemsSortedBy() {
+        webPage.userShouldSeeTheItemsSortedBy();
     }
 }

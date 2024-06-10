@@ -83,5 +83,5 @@ Feature: Web Automation Test
     And user input password "secret_sauce"
     And user clicks login button
     Then user should see cart icon on inventory page
-    When user clicks sort button and select "Name (Z to A)"
-    Then user should see the items sorted by "Name (Z to A)"
+    When user clicks sort button and select "Price (low to high)"
+    Then user should see the items are sorted
