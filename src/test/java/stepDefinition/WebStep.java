@@ -51,9 +51,9 @@ public class WebStep {
         }
     }
 
-    @Then("verify number of items in cart matches")
-    public void verifyNumberOfItemsInCartMatches() {
-        webPage.assertNumberOfItemsInCart();
+    @When("user clicks add to cart button on {string}")
+    public void userClicksAddToCartButtonOn(String itemName) {
+        webPage.userClicksAddToCartButtonOn(itemName);
     }
 
     @When("user clicks remove button {int} time\\(s)")
@@ -61,5 +61,35 @@ public class WebStep {
         for (int i = 0; i < clicks; i++) {
             webPage.userClicksRemoveButton();
         }
+    }
+
+    @Then("verify number of items in cart matches")
+    public void verifyNumberOfItemsInCartMatches() {
+        webPage.assertNumberOfItemsInCart();
+    }
+
+    @When("user clicks the cart icon")
+    public void userClicksTheCartIcon() {
+        webPage.userClicksTheCartIcon();
+    }
+
+    @Then("user redirected to cart page")
+    public void userRedirectedToCartPage() {
+        webPage.userRedirectedToCartPage();
+    }
+
+    @And("user should see the {string} item in cart")
+    public void userShouldSeeTheItemInCart(String itemName) {
+        webPage.userShouldSeeTheItemInCart(itemName);
+    }
+
+    @When("user clicks sort button and select {string}")
+    public void userClicksSortButtonAndSelect(String sortOptions) {
+        webPage.userClicksSortButtonAndSelect(sortOptions);
+    }
+
+    @Then("user should see the items sorted by {string}")
+    public void userShouldSeeTheItemsSortedBy(String sortOptions) {
+        webPage.userShouldSeeTheItemsSortedBy(sortOptions);
     }
 }
