@@ -37,7 +37,7 @@ configurations {
     }
 }
 
-tasks.register("apiTest") {
+tasks.register("webTest") {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
