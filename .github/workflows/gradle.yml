@@ -44,5 +44,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4.0.0
       if: always()
       with:
-        personal_token: ${{ secrets.API_TEST_TOKEN }}
+        personal_token: ${{ secrets.WEB_TEST_TOKEN }}
         publish_dir: reports
